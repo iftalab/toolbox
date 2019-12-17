@@ -26,4 +26,8 @@ public class Supplier {
             return resources.getColor(colorResourceId);
         }
     }
+
+    public static Resources getResources() {
+        return resources;
+    }
 }
