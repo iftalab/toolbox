@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.bumptech.glide.Glide;
@@ -22,8 +23,8 @@ public class ImageUtil {
                 .into(imageView);
     }
 
-    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+    public static Bitmap getBitmapFromVectorDrawable(Resources resources, int drawableId) {
+        Drawable drawable = ResourcesCompat.getDrawable(resources, drawableId, null);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             drawable = (DrawableCompat.wrap(drawable)).mutate();
         }
