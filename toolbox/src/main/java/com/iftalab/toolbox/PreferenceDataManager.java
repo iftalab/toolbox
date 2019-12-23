@@ -17,6 +17,7 @@ public class PreferenceDataManager {
     public static void register(Context context) {
         preference = context.getSharedPreferences("iPrefs", MODE_PRIVATE);
     }
+
     //=====================PUT============================
     public static void quickPut(String key, String value) {
         preference.edit().putString(key, value).apply();
@@ -61,11 +62,15 @@ public class PreferenceDataManager {
     }
 
     public static void quickRemove(String key) {
-         preference.edit().remove(key).apply();
+        preference.edit().remove(key).apply();
     }
 
     public static void clearAll() {
         preference.edit().clear().apply();
+    }
+
+    public static void forceClearAll() {
+        preference.edit().clear().commit();
     }
 
     //===============================================================
