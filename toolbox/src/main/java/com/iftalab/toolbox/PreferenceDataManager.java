@@ -1,7 +1,10 @@
 package com.iftalab.toolbox;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import androidx.annotation.NonNull;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -12,10 +15,10 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class PreferenceDataManager {
-    private static SharedPreferences preference = null;
+    private static volatile SharedPreferences preference = null;
 
     public static void register(Context context) {
-        preference = context.getSharedPreferences("iPrefs", MODE_PRIVATE);
+        preference = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
     }
 
     //=====================PUT============================
@@ -37,6 +40,32 @@ public class PreferenceDataManager {
 
     public static void quickPut(String key, float value) {
         preference.edit().putFloat(key, value).apply();
+    }
+
+    //=====================FORCE PUT============================
+    @SuppressLint("ApplySharedPref")
+    public static boolean forcePut(String key, String value) {
+        return preference.edit().putString(key, value).commit();
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public static boolean forcePut(String key, boolean value) {
+        return preference.edit().putBoolean(key, value).commit();
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public static boolean forcePut(String key, int value) {
+        return preference.edit().putInt(key, value).commit();
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public static boolean forcePut(String key, long value) {
+        return preference.edit().putLong(key, value).commit();
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public static boolean forcePut(String key, float value) {
+        return preference.edit().putFloat(key, value).commit();
     }
 
     //================================================================
@@ -69,8 +98,9 @@ public class PreferenceDataManager {
         preference.edit().clear().apply();
     }
 
-    public static void forceClearAll() {
-        preference.edit().clear().commit();
+    @SuppressLint("ApplySharedPref")
+    public static boolean forceClearAll() {
+        return preference.edit().clear().commit();
     }
 
     //===============================================================
