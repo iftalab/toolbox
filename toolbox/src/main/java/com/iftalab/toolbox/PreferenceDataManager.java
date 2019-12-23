@@ -18,7 +18,7 @@ public class PreferenceDataManager {
     private static volatile SharedPreferences preference = null;
 
     public static void register(Context context) {
-        preference = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
+        preference = context.getSharedPreferences("streamAnyconnet", MODE_PRIVATE);
     }
 
     //=====================PUT============================
