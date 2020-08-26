@@ -5,10 +5,20 @@ import android.os.Handler;
 import android.os.Looper;
 
 public class HandlerServer {
-    private static Handler handler;
+    private static volatile Handler handler;
     private static Handler uiHandler;
+    static {
+        initialize();
+    }
+    public static void initialize() {
+        Executor.ex(() -> {
+            Looper.prepare();
+            handler = new Handler();
+            Looper.loop();
+        });
+    }
 
-    public static Handler getHandler() {
+    public static Handler getNonUiHandler() {
         if (handler == null) {
             handler = new Handler();
         }
